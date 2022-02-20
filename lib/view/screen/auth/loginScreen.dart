@@ -1,17 +1,18 @@
-import 'package:commerce_app/utils/custom_button.dart';
+import 'package:commerce_app/controller/login_controller.dart';
 import 'package:commerce_app/utils/custom_text_field.dart';
 import 'package:commerce_app/utils/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     return Scaffold(
-      backgroundColor: kColor4,
-      body: SafeArea(
+      backgroundColor: K.kColor4,
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
@@ -28,85 +29,88 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Container(
-              height: 420,
+              height: 400,
               margin: const EdgeInsets.only(left: 13, right: 13),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 22),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        const Padding(
-                            padding:
-                                EdgeInsets.only(left: 48, top: 22, bottom: 35)),
-                        const Text(
-                          'SIGN IN',
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const Padding(
+                          padding:
+                              EdgeInsets.only(left: 48, top: 22, bottom: 35)),
+                      const Text(
+                        'SIGN IN',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        width: 100,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Get.toNamed(Routes.signUpScreen);
+                        },
+                        child: const Text(
+                          'SIGN UP',
                           style: TextStyle(
                               fontSize: 18,
                               color: Colors.black,
                               fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(
-                          width: 100,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // Get.toNamed(Routes.signUpScreen);
-                          },
-                          child: const Text(
-                            'SIGN UP',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    const Divider(
-                      thickness: 2,
-                      color: Color(0xff9a9494),
-                    ),
-                    const SizedBox(
-                      height: 17,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 15, right: 15, bottom: 31),
-                      child: Text(
-                        'welcome, Please Login to Your Account',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    thickness: 2,
+                    color: Color(0xff9a9494),
+                  ),
+                  const SizedBox(
+                    height: 17,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 15, right: 15, bottom: 31),
+                    child: Text(
+                      'welcome, Please Login to Your Account',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(
-                          left: 10, right: 10, bottom: 18),
-                      height: 55,
-                      child: const CustomTextField(
-                        labelText: 'Email id / Mobile Number',
-                      ),
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, bottom: 18),
+                    height: 55,
+                    child: CustomTextField(
+                      controller: controller.textEditingControllerEmail,
+                      onchange: (value) {
+                        controller.email.value = value;
+                      },
+                      labelText: 'Email id / Mobile Number',
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(
-                          left: 10, right: 10, bottom: 18),
-                      height: 55,
-                      child: const CustomTextField(
-                        labelText: 'Password',
-                      ),
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, bottom: 18),
+                    height: 55,
+                    child: CustomTextField(
+                      controller: controller.textEditingControllerPassword,
+                      onchange: (value) {
+                        controller.password.value = value;
+                      },
+                      labelText: 'Password',
                     ),
-                    FlatButton(
-                      onPressed: () {},
-                      textColor: Colors.grey,
-                      padding: const EdgeInsets.only(left: 200),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: GestureDetector(
+                      onTap: () {},
                       child: const Text(
                         'Forgot Password?',
                         textAlign: TextAlign.end,
@@ -116,14 +120,18 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 2,
-                    ),
-                    const CustomButton(
-                      Text('SIGNIN'),
-                    ),
-                  ],
-                ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      controller.textEditingControllerPassword.clear();
+                      controller.textEditingControllerEmail.clear();
+                      controller.login();
+                    },
+                    style: TextButton.styleFrom(backgroundColor: K.kColor1),
+                    child: const Text("Sign up",
+                        style: TextStyle(fontSize: 18, color: K.kColor5)),
+                  )
+                ],
               ),
             ),
             const SizedBox(

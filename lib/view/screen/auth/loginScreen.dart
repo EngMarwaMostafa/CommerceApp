@@ -37,100 +37,144 @@ class LoginScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      const Padding(
-                          padding:
-                              EdgeInsets.only(left: 48, top: 22, bottom: 35)),
-                      const Text(
-                        'SIGN IN',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        width: 100,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // Get.toNamed(Routes.signUpScreen);
-                        },
-                        child: const Text(
-                          'SIGN UP',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                controller.checkFun();
+                              },
+                              child: const Text(
+                                'SIGN IN',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Obx(() => controller.check.value
+                                ? Container(
+                                    height: 5, width: 50, color: K.kColor2)
+                                : Container())
+                          ],
                         ),
-                      ),
-                    ],
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                controller.checkFun();
+                              },
+                              child: const Text(
+                                'SIGN UP',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Obx(() => controller.check.value
+                                ? Container()
+                                : Container(
+                                    height: 5, width: 50, color: K.kColor2))
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   const Divider(
                     thickness: 2,
                     color: Color(0xff9a9494),
                   ),
-                  const SizedBox(
-                    height: 17,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 15, bottom: 31),
-                    child: Text(
-                      'welcome, Please Login to Your Account',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, bottom: 18),
-                    height: 55,
-                    child: CustomTextField(
-                      controller: controller.textEditingControllerEmail,
-                      onchange: (value) {
-                        controller.email.value = value;
-                      },
-                      labelText: 'Email id / Mobile Number',
-                    ),
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, bottom: 18),
-                    height: 55,
-                    child: CustomTextField(
-                      controller: controller.textEditingControllerPassword,
-                      onchange: (value) {
-                        controller.password.value = value;
-                      },
-                      labelText: 'Password',
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: const Text(
-                        'Forgot Password?',
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xff515C6F),
-                        ),
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      controller.textEditingControllerPassword.clear();
-                      controller.textEditingControllerEmail.clear();
-                      controller.login();
-                    },
-                    style: TextButton.styleFrom(backgroundColor: K.kColor1),
-                    child: const Text("Sign up",
-                        style: TextStyle(fontSize: 18, color: K.kColor5)),
-                  )
+                  Obx(() => controller.check.value
+                      ? Material(
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 17,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                    left: 15, right: 15, bottom: 31),
+                                child: Text(
+                                  'welcome, Please Login to Your Account',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 18),
+                                height: 55,
+                                child: CustomTextField(
+                                  controller:
+                                      controller.textEditingControllerEmail,
+                                  onchange: (value) {
+                                    controller.email.value = value;
+                                  },
+                                  labelText: 'Email id / Mobile Number',
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 18),
+                                height: 55,
+                                child: CustomTextField(
+                                  controller:
+                                      controller.textEditingControllerPassword,
+                                  onchange: (value) {
+                                    controller.password.value = value;
+                                  },
+                                  labelText: 'Password',
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: const Text(
+                                    'Forgot Password?',
+                                    textAlign: TextAlign.end,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xff515C6F),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  controller.textEditingControllerPassword
+                                      .clear();
+                                  controller.textEditingControllerEmail.clear();
+                                  controller.login();
+                                },
+                                style: TextButton.styleFrom(
+                                    backgroundColor: K.kColor1),
+                                child: const Text("Sign up",
+                                    style: TextStyle(
+                                        fontSize: 18, color: K.kColor5)),
+                              )
+                            ],
+                          ),
+                        )
+                      : Material(
+                          child: Column(
+                            children: [
+                              //اكتبى هتااا الكود الجديد
+
+
+                            ],
+                          ),
+                        )),
                 ],
               ),
             ),

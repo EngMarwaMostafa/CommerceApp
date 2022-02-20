@@ -10,6 +10,11 @@ class LoginController extends BaseController {
   TextEditingController textEditingControllerPassword = TextEditingController();
   final email = ''.obs;
   final password = ''.obs;
+  final check = true.obs;
+
+  checkFun() {
+    check.value =! check.value;
+  }
 
   login() async {
     UserModel? userModel = await _services.login(email.value, password.value);

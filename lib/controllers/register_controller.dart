@@ -27,4 +27,5 @@ class RegisterController extends BaseController {
     UserModel? userModel = await _registerServices.
     register(name.value, email.value, password.value, mobile.value);
   }
+
 }

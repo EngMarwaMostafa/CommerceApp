@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,18 +7,15 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body: Center(
-          child:(
-          FlatButton(
-            minWidth: 320,
-            height: 48,
-            textColor: Colors.white,
-            onPressed: () {},
-            child: Text(''),
-          )),
-          ),
+      body: Center(
+        child: (
+            FlatButton(
+              minWidth: 320,
+              height: 48,
+              textColor: Colors.white,
+              onPressed: () {},
+              child: Text(''),
+            )),
+      ),
     );
-
-
-  }
-}
+  }}

@@ -1,283 +1,327 @@
-import 'package:commerce_app/controllers/login_controller.dart';
-import 'package:commerce_app/controllers/register_controller.dart';
+import 'package:commerce_app/controllers/auth_controller.dart';
 import 'package:commerce_app/utils/custom_text_field.dart';
 import 'package:commerce_app/utils/theme.dart';
+import 'package:commerce_app/view/screen/auth/forgetPasswordScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class AuthScreen extends StatelessWidget {
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginController());
-    final registerController = Get.put(RegisterController());
+    final controller = Get.put(AuthController());
     return Scaffold(
       backgroundColor: K.kColor4,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.only(top: 67, bottom: 43),
-              child: const Text(
+              padding: EdgeInsets.only(top: 67.h, bottom: 43.h),
+              child: Text(
                 'BUYIT',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontSize: 30,
+                  fontSize: 30.sp,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
             //   const SizedBox(height: 43),
-            Container(
-              height: 385,
-              margin: const EdgeInsets.only(left: 13, right: 13),
-              decoration: BoxDecoration(
+            Padding(
+              padding: EdgeInsets.all(8.0.w),
+              child: Material(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                controller.checkFun();
-                              },
-                              child: const Text(
-                                'SIGN IN',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Obx(() => controller.check.value
-                                ? Container(
-                                    height: 5, width: 50, color: K.kColor2)
-                                : Container())
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                controller.checkFun();
-                              },
-                              child: const Text(
-                                'SIGN UP',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Obx(
-                              () => controller.check.value
-                                  ? Container()
-                                  : Container(
-                                      height: 5, width: 50, color: K.kColor2),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 2,
-                    color: Color(0xff9a9494),
-                  ),
-                  Obx(
-                    () => controller.check.value
-                        ? Material(
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 17,
-                                ),
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.only(right: 15, bottom: 29),
-                                  child: Text(
-                                    'Welcome, Please Login to Your Account',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(5.r),
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 10.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  controller.checkFun();
+                                },
+                                child: Text(
+                                  'SIGN IN',
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
                                       color: Colors.black,
-                                    ),
-                                  ),
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, right: 10, bottom: 18),
-                                  height: 60,
-                                  child: CustomTextField(
-                                    controller:
-                                        controller.textEditingControllerEmail,
-                                    onchange: (value) {
-                                      controller.email.value = value;
-                                    },
-                                    labelText: 'Email id / Mobile Number',
-                                  ),
+                              ),
+                              SizedBox(height: 5.h),
+                              Obx(() => controller.check.value
+                                  ? Container(
+                                      height: 5.h,
+                                      width: 50.w,
+                                      color: K.kColor2)
+                                  : Container())
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  controller.checkFun();
+                                },
+                                child: Text(
+                                  'SIGN UP',
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10, bottom: 18),
-                                  height: 60,
-                                  child: CustomTextField(
-                                    controller: controller
-                                        .textEditingControllerPassword,
-                                    onchange: (value) {
-                                      controller.password.value = value;
-                                    },
-                                    labelText: 'Password',
+                              ),
+                              SizedBox(height: 5.h),
+                              Obx(
+                                () => controller.check.value
+                                    ? Container()
+                                    : Container(
+                                        height: 5.h,
+                                        width: 50.w,
+                                        color: K.kColor2),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(
+                      thickness: 2,
+                      color: Color(0xff9a9494),
+                    ),
+                    Obx(
+                      () => controller.check.value
+                          ? Material(
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 17.h,
                                   ),
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: const Text(
-                                      'Forgot Password?',
-                                      textAlign: TextAlign.end,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        right: 15.w, bottom: 29.h),
+                                    child: Text(
+                                      'Welcome, Please Login to Your Account',
                                       style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xff515C6F),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15.sp,
+                                        color: Colors.black,
                                       ),
                                     ),
                                   ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    controller.textEditingControllerPassword
-                                        .clear();
-                                    controller.textEditingControllerEmail
-                                        .clear();
-                                    controller.login();
-                                  },
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: K.kColor1),
-                                  child: const Text(
-                                    "SIGN IN",
-                                    style: TextStyle(
-                                        fontSize: 18, color: K.kColor5),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Material(
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 17,
-                                ),
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.only(right: 15, bottom: 29),
-                                  child: Text(
-                                    'Welcome, Please Create Your Account',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.black,
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 15.w, right: 10.w, bottom: 18.h),
+                                    height: 60.h,
+                                    child: CustomTextField(
+                                      controller:
+                                          controller.textEditingControllerEmail,
+                                      onchange: (value) {
+                                        controller.email.value = value;
+                                      },
+                                      labelText: 'Email id / Mobile Number',
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, right: 10, bottom: 18),
-                                  height: 60,
-                                  child: CustomTextField(
-                                    controller: registerController
-                                        .textEditingControllerName,
-                                    onchange: (value) {
-                                      registerController.name.value = value;
-                                    },
-                                    labelText: 'Full Nme',
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: 10.w, right: 10.w, bottom: 18.h),
+                                    height: 60.h,
+                                    child: CustomTextField(
+                                      controller: controller
+                                          .textEditingControllerPassword,
+                                      onchange: (value) {
+                                        controller.password.value = value;
+                                      },
+                                      labelText: 'Password',
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, right: 10, bottom: 18),
-                                  height: 60,
-                                  child: CustomTextField(
-                                    controller: registerController
-                                        .textEditingControllerMobile,
-                                    onchange: (value) {
-                                      registerController.mobile.value = value;
-                                    },
-                                    labelText: 'Mobile Number',
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 15.w),
+                                    child: Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Get.to(() =>
+                                              const ForgetPasswordScreen());
+                                        },
+                                        child: Text(
+                                          'Forgot Password?',
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            color: const Color(0xff515C6F),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10, bottom: 18),
-                                  height: 60,
-                                  child: CustomTextField(
-                                    controller: controller
-                                        .textEditingControllerPassword,
-                                    onchange: (value) {
-                                      controller.password.value = value;
-                                    },
-                                    labelText: 'Password',
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 22.h, bottom: 18.h),
+                                    child: SizedBox(
+                                      width: 320.w,
+                                      height: 48.h,
+                                      child: TextButton(
+                                        onPressed: () {
+                                          controller.textEditingControllerEmail
+                                              .clear();
+                                          controller
+                                              .textEditingControllerPassword
+                                              .clear();
+                                          controller.login();
+                                        },
+                                        style: TextButton.styleFrom(
+                                            backgroundColor: K.kColor1),
+                                        child: Text(
+                                          "SIGN IN",
+                                          style: TextStyle(
+                                              fontSize: 18.sp,
+                                              color: K.kColor5),
+                                        ),
+                                      ),
+                                    ),
                                   ),
+                                ],
+                              ),
+                            )
+                          : Material(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 17.h,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          right: 15.w, bottom: 29.h),
+                                      child: Text(
+                                        'Welcome, Please Create Your Account',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 15.w,
+                                          right: 10.w,
+                                          bottom: 18.h),
+                                      height: 60.h,
+                                      child: CustomTextField(
+                                        controller: controller
+                                            .textEditingControllerNameSignup,
+                                        onchange: (value) {
+                                          controller.nameSignup.value = value;
+                                        },
+                                        labelText: 'Full Nme',
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 15.w,
+                                          right: 10.w,
+                                          bottom: 18.h),
+                                      height: 60.h,
+                                      child: CustomTextField(
+                                        controller: controller
+                                            .textEditingControllerMobileSignUp,
+                                        onchange: (value) {
+                                          controller.mobileSignUp.value = value;
+                                        },
+                                        labelText: 'Mobile Number',
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 10.w,
+                                          right: 10.w,
+                                          bottom: 18.h),
+                                      height: 60.h,
+                                      child: CustomTextField(
+                                        controller: controller
+                                            .textEditingControllerPasswordSignUp,
+                                        onchange: (value) {
+                                          controller.passwordSignUp.value =
+                                              value;
+                                        },
+                                        labelText: 'Password',
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 10.w,
+                                          right: 10.w,
+                                          bottom: 18.h),
+                                      height: 60.h,
+                                      child: CustomTextField(
+                                        controller: controller
+                                            .textEditingControllerEmailSignUp,
+                                        onchange: (value) {
+                                          controller.emailSignUp.value = value;
+                                        },
+                                        labelText: 'Email',
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 18.h, bottom: 27.h),
+                                      child: SizedBox(
+                                        width: 320.w,
+                                        height: 48.h,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            controller
+                                                .textEditingControllerPasswordSignUp
+                                                .clear();
+                                            controller
+                                                .textEditingControllerEmailSignUp
+                                                .clear();
+                                            controller
+                                                .textEditingControllerNameSignup
+                                                .clear();
+                                            controller
+                                                .textEditingControllerMobileSignUp
+                                                .clear();
+                                            controller.register();
+                                          },
+                                          style: TextButton.styleFrom(
+                                              backgroundColor: K.kColor1),
+                                          child: Text(
+                                            "SIGN UP",
+                                            style: TextStyle(
+                                                fontSize: 18.sp,
+                                                color: K.kColor5),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10, bottom: 18),
-                                  height: 60,
-                                  child: CustomTextField(
-                                    controller:
-                                        controller.textEditingControllerEmail,
-                                    onchange: (value) {
-                                      controller.email.value = value;
-                                    },
-                                    labelText: 'Email',
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    registerController
-                                        .textEditingControllerPassword
-                                        .clear();
-                                    registerController
-                                        .textEditingControllerEmail
-                                        .clear();
-                                    registerController.textEditingControllerName
-                                        .clear();
-                                    registerController
-                                        .textEditingControllerMobile
-                                        .clear();
-                                    registerController.register();
-                                  },
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: K.kColor1),
-                                  child: const Text(
-                                    "SIGN UP",
-                                    style: TextStyle(
-                                        fontSize: 18, color: K.kColor5),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(
+            /*    const SizedBox(
               height: 38,
             ),
             const Text(
@@ -301,7 +345,7 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-            ),
+            ), */
           ],
         ),
       ),

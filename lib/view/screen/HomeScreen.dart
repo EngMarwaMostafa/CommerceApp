@@ -1,17 +1,17 @@
-import 'package:commerce_app/utils/theme.dart';
+import 'package:commerce_app/controllers/product_controller.dart';
+import 'package:commerce_app/models/product_model.dart';
 import 'package:commerce_app/view/widget/home/CircleItems.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:commerce_app/view/widget/home/card_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-
-class   HomeScreen extends StatelessWidget {
-  const   HomeScreen({Key? key}) : super(key: key);
-
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-  //  final controller = Get.put(ProductController());
+    final controller = Get.put(ProductController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -30,8 +30,8 @@ class   HomeScreen extends StatelessWidget {
                   ),
                 ),
                 child: TextField(
-                  onChanged: (v) {
-                   // controller.addSearchToList(v);
+                  onSubmitted: (v) {
+                    controller.searchData(v);
                   },
                   decoration: InputDecoration(
                     hintText: "Search Something",
@@ -46,18 +46,17 @@ class   HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const CircleItems(
+            const CircleItems(),
+            Padding(
+              padding: EdgeInsets.only(top: 12.h, bottom: 22.h),
+              child: SizedBox(
+                width: 375.w,
+                height: 130.h,
+                // child:  banner(
+                //  ),
+              ),
             ),
-             Padding(
-               padding: EdgeInsets.only(top: 12.h,bottom: 22.h),
-               child: SizedBox(
-                   width: 375.w,
-                   height: 130.h,
-                    // child:  banner(
-                   //  ),
-                 ),
-             ),
-             SizedBox(
+            SizedBox(
               height: 10.h,
             ),
             Padding(
@@ -74,70 +73,42 @@ class   HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-           SizedBox(
+            SizedBox(
               height: 5.h,
             ),
-
-          /*  Obx(
-                  () => controller.productList.isEmpty
-                  ? const Center(
-                  child: CircularProgressIndicator(
-                    color: Color(0xff72ecc4),
-                  ))
-                  : Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.isSearched.value
-                        ? controller.searchList.length
-                        : controller.productList.length,
-                    itemBuilder: (ctx, index) => Obx(
-                          () => ItemCard(
-                        // favIcon:(){
-                        //  controller.isFavourites(controller.productList[index].id);
-                        //   },
-                        //   icon: controller.isFavourites(controller.productList[index].id)
-                        //    ? const Icon(
-                        //      Icons.favorite,
-                        //     color: Colors.red,
-                        //  ):
-                        //  Icon(Icons.favorite_outline),
-                        iconTap: () {
-                          CartController.to.addProductsToCart(
-                              controller.productList[index]);
-                        },
-                        onTap: () {
-                          Get.to(() => ProductDetailsScreen(
-                              productModels:
-                              controller.productList[index]));
-                        },
-                        price: controller.isSearched.value
-                            ? controller.searchList[index].price
-                            .toString()
-                            : controller.productList[index].price
-                            .toString(),
-                        image: controller.isSearched.value
-                            ? controller.searchList[index].coverImg
-                            : controller.productList[index].coverImg,
-                        quantity: controller.isSearched.value
-                            ? controller.searchList[index].quantity
-                            .toString()
-                            : controller.productList[index].quantity
-                            .toString(),
-                        name:
-                        controller.productList[index].name.toString(),
+            FutureBuilder<ProductModel>(
+                future: controller.future,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: SizedBox(
+                        height: 300,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: snapshot.data!.data!.length,
+                          itemBuilder: (ctx, index) => CardItems(
+                              iconTap: () {},
+                              onTap: () {},
+                              price:
+                                  snapshot.data!.data![index].price.toString(),
+                              image: snapshot.data!.data![index].coverImg,
+                              quantity: snapshot.data!.data![index].quantity
+                                  .toString(),
+                              name: snapshot.data!.data![index].name!,
+                              favIcon: () {},
+                              icon: Icon(Icons.favorite)),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-            ), */
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                }),
             Padding(
-              padding: EdgeInsets.only(top: 12.h,bottom: 22.h),
+              padding: EdgeInsets.only(top: 12.h, bottom: 22.h),
               child: SizedBox(
                 width: 375.w,
                 height: 130.h,
@@ -145,7 +116,6 @@ class   HomeScreen extends StatelessWidget {
                 //  ),
               ),
             ),
-
             Text(
               'Most Viewed Products',
               style: TextStyle(
@@ -153,70 +123,40 @@ class   HomeScreen extends StatelessWidget {
                   fontSize: 15.sp,
                   fontWeight: FontWeight.bold),
             ),
-           SizedBox(
+            SizedBox(
               height: 5.h,
             ),
-          /*  Obx(
-                  () => controller.productList.isEmpty
-                  ? const Center(
-                  child: CircularProgressIndicator(
-                    color: Color(0xff72ecc4),
-                  ))
-                  : Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.isSearched.value
-                        ? controller.searchList.length
-                        : controller.productList.length,
-                    itemBuilder: (ctx, index) => Obx(
-                          () => ItemCard(
-                        // favIcon:()
-                        //  {
-                        //    controller.isFavourites(controller.productList[index].id);
-                        //      },
-                        //   icon: controller.isFavourites(controller.productList[index].id)
-                        //    ? const Icon(
-                        //   Icons.favorite,
-                        //   color: Colors.red,
-                        //      )
-                        //    :
-                        //     Icon(Icons.favorite_outline),
-                        iconTap: () {
-                          CartController.to.addProductsToCart(
-                              controller.productList[index]);
-                        },
-
-                        onTap: () {
-                          Get.to(() => ProductDetailsScreen(
-                              productModels:
-                              controller.productList[index]));
-                        },
-                        price: controller.isSearched.value
-                            ? controller.searchList[index].price
-                            .toString()
-                            : controller.productList[index].price
-                            .toString(),
-                        image: controller.isSearched.value
-                            ? controller.searchList[index].coverImg
-                            : controller.productList[index].coverImg,
-                        quantity: controller.isSearched.value
-                            ? controller.searchList[index].quantity
-                            .toString()
-                            : controller.productList[index].quantity
-                            .toString(),
-                        name:
-                        controller.productList[index].name.toString(),
+            FutureBuilder<ProductModel>(
+                future: controller.future,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: SizedBox(
+                        height: 300,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: snapshot.data!.data!.length,
+                          itemBuilder: (ctx, index) => CardItems(
+                              iconTap: () {},
+                              onTap: () {},
+                              price:
+                                  snapshot.data!.data![index].price.toString(),
+                              image: snapshot.data!.data![index].coverImg,
+                              quantity: snapshot.data!.data![index].quantity
+                                  .toString(),
+                              name: snapshot.data!.data![index].name!,
+                              favIcon: () {},
+                              icon: Icon(Icons.favorite)),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-            ), */
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                }),
           ],
         ),
       ),

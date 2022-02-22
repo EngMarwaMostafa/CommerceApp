@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              color: const Color(0xffEFEFEF),
+             // color: const Color(0xffEFEFEF),
               height: 60.h,
               child: Container(
                 margin: EdgeInsets.only(
@@ -116,12 +116,19 @@ class HomeScreen extends StatelessWidget {
                 //  ),
               ),
             ),
-            Text(
-              'Most Viewed Products',
-              style: TextStyle(
-                  color: const Color(0xff515C6F),
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.bold),
+            Padding(
+              padding: EdgeInsets.only(left: 8.0.w, right: 8.w, top: 8.h),
+              child: Row(
+                children: [
+                  Text(
+                    'Most Viewed Products',
+                    style: TextStyle(
+                        color: const Color(0xff515C6F),
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 5.h,

@@ -1,5 +1,5 @@
 import 'package:commerce_app/models/user_model.dart';
-import 'package:commerce_app/services/login_service.dart';
+import 'package:commerce_app/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 

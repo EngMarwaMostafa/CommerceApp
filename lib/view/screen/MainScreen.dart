@@ -23,7 +23,7 @@ class MainScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
-              toolbarHeight: 95.h,
+              toolbarHeight: 85.h,
               backgroundColor:K.kColor2,
               title: const Text('BUY'),
               leading: IconButton(
@@ -58,7 +58,7 @@ class MainScreen extends StatelessWidget {
             ),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor:  Colors.black,
-          //    currentIndex: controller.currentIndex.value,
+              currentIndex: controller.currentIndex.value,
               type: BottomNavigationBarType.fixed,
               items: const [
                 BottomNavigationBarItem(

@@ -14,11 +14,24 @@ class CircleItems extends StatelessWidget {
         child: Row(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 15.w,right: 32.w,bottom:8.h,top: 15.h),
+              padding: EdgeInsets.only(left: 10.w,right: 32.w,bottom:8.h,top: 15.h),
               child: Column(
                 children: [
                   CircleAvatar(
-                    radius: 37.r,
+                    radius: 45.r,
+                    child: const Icon
+                      (Icons.open_with_rounded, color: Colors.black,),
+                  ),
+                  Text('Accessories'),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15,right: 25,bottom: 8,top: 15),
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 45.r,
                     child: const Icon
                       (Icons.open_with_rounded, color: Colors.black,),
                   ),
@@ -31,20 +44,7 @@ class CircleItems extends StatelessWidget {
               child: Column(
                 children: [
                   CircleAvatar(
-                    radius: 37.r,
-                    child: const Icon
-                      (Icons.open_with_rounded, color: Colors.black,),
-                  ),
-                  Text('Accessories'),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15,right: 32,bottom: 8,top: 15),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 37.r,
+                    radius: 45.r,
                     child: const Icon
                       (Icons.open_with_rounded, color: Colors.black,),
                   ),

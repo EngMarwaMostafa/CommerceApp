@@ -1,4 +1,5 @@
 
+import 'package:commerce_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,7 +33,7 @@ class CardItems extends StatelessWidget {
       child: Card(
         elevation: 8,
         child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r),),
           child: Padding(
             padding:  EdgeInsets.all(8.0.w),
             child: Column(
@@ -41,8 +42,8 @@ class CardItems extends StatelessWidget {
                   margin: EdgeInsets.only(
                     top: 10.h,
                   ),
-                  width: 100.w,
-                  height: 100.h,
+                  width: 110.w,
+                  height: 110.h,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10.r),
@@ -76,8 +77,16 @@ class CardItems extends StatelessWidget {
                   ],
                 ),
                 Row(
-                  children: const [
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children:  [
                     Text(
+                      price!.toString(),
+                      style:  TextStyle(color: K.kColor2,
+                      fontSize: 20.sp),
+                    ),
+                    SizedBox(width: 20.w,),
+                    const Text(
                       'SAR 300',
                       style: TextStyle(color: Colors.grey),
                     ),
@@ -92,34 +101,49 @@ class CardItems extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text(
-                      price!.toString(),
-                      style: const TextStyle(color: Colors.green),
-                    ),
                      SizedBox(
                       width: 7.w,
                     ),
                     Row(
-                      //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                    children: [
                          SizedBox(width: 5.w),
-                        //   IconButton(
-                        //  onPressed:favIcon,
-                        //  icon: controller.isFavourites(productId)
-                        //   ? const Icon(
-                        //     Icons.favorite,
-                        //     color: Colors.red,
+                       IconButton(
+                        onPressed:favIcon,
+                     //  icon: controller.isFavourites(productId)
+                      // ? const Icon(
+                        //  Icons.favorite,
+                       //   color: Colors.red,
                         //  )
-                        //   icon: icon!,
-                        //   ),
+                         icon: icon!,
+                        ),
                         SizedBox(width: 5.w),
-                        IconButton(
+                     Container(
+                       alignment: Alignment.bottomRight,
+                       height: 40.h,
+                       width: 100.w,
+                       color: Colors.black,
+                       child:
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children:const [
+                           Icon(Icons.shopping_cart_rounded,
+                             color: Colors.white,),
+                           Text('Add to Cart',
+                             style: TextStyle(color: Colors.white,
+                                 fontSize: 10,
+                                 fontWeight: FontWeight.bold),),
+                           SizedBox(height: 5,)
+                         ],
+                       ),
+                     ),
+                       /* IconButton(
                           onPressed: iconTap,
                           icon: const Icon(
                             Icons.shopping_cart,
                             color: Colors.black,
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
                   ],

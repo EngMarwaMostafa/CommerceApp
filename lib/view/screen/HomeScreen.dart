@@ -30,8 +30,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 child: TextField(
-                  onChanged: (v) {
-                    // controller.addSearchToList(v);
+                  onSubmitted: (v) {
+                    controller.searchData(v);
                   },
                   decoration: InputDecoration(
                     hintText: "Search Something",
@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                               iconTap: () {},
                               onTap: () {},
                               price:
-                              snapshot.data!.data![index].price.toString(),
+                                  snapshot.data!.data![index].price.toString(),
                               image: snapshot.data!.data![index].coverImg,
                               quantity: snapshot.data!.data![index].quantity
                                   .toString(),
@@ -107,8 +107,6 @@ class HomeScreen extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   }
                 }),
-
-
             Padding(
               padding: EdgeInsets.only(top: 12.h, bottom: 22.h),
               child: SizedBox(

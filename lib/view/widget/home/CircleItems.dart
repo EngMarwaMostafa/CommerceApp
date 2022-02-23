@@ -1,59 +1,31 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CircleItems extends StatelessWidget {
-  const CircleItems({Key? key}) : super(key: key);
+  const CircleItems({Key? key, this.label, this.image}) : super(key: key);
+  final String? image;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
-    return
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 10.w,right: 32.w,bottom:8.h,top: 15.h),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 45.r,
-                    child: const Icon
-                      (Icons.open_with_rounded, color: Colors.black,),
-                  ),
-                  Text('Accessories'),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15,right: 25,bottom: 8,top: 15),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 45.r,
-                    child: const Icon
-                      (Icons.open_with_rounded, color: Colors.black,),
-                  ),
-                  Text('Accessories'),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15,right: 32,bottom: 8,top: 15),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 45.r,
-                    child: const Icon
-                      (Icons.open_with_rounded, color: Colors.black,),
-                  ),
-                  Text('Accessories'),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Container(
+            height: 60.h,
+            width: 60.w,
+            clipBehavior: Clip.antiAlias,
+            decoration: const BoxDecoration(shape: BoxShape.circle),
+            child: Image.network(image!,
+                height: double.infinity,
+                width: double.infinity,
+                fit: BoxFit.contain),
+          ),
+          Text(label!),
+        ],
+      ),
+    );
   }
 }

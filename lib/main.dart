@@ -1,3 +1,4 @@
+import 'package:commerce_app/routes/routes.dart';
 import 'package:commerce_app/view/screen/MainScreen.dart';
 import 'package:commerce_app/view/screen/auth/loginScreen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:MainScreen(),
+     //   initialRoute: AppRoute.sideBarScreen,
+     getPages: AppRoute.routes,
+        home: MainScreen(),
       ),
     );
   }

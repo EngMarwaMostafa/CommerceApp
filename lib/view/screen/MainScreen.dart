@@ -22,40 +22,6 @@ class MainScreen extends StatelessWidget {
             () {
           return Scaffold(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              toolbarHeight: 85.h,
-              backgroundColor:K.kColor2,
-              title: const Text('BUY'),
-              leading: IconButton(
-                onPressed: () {
-                  Get.toNamed(AppRoute.sideBar);
-                },
-                icon: Image.asset('assets/menu.png'),
-              ),
-              actions: [
-              SizedBox(
-                  width: 15.w,
-                ),
-             /*   Obx(
-                      () => Badge(
-                    position: BadgePosition.topEnd(top:12.h, end: 3.w),
-                    animationDuration: const Duration(milliseconds: 300),
-                    animationType: BadgeAnimationType.slide,
-                  //  badgeContent:
-                    //Text(
-                   //   cartController.quantity().toString(),
-                   //   style: const TextStyle(color: Colors.white),
-                //    ),
-                    child: IconButton(
-                      onPressed: () {
-                      //  Get.toNamed(Routes.ShoppingCartScreen);
-                      },
-                      icon: Image.asset('assets/cart-home.png'),
-                    ),
-                  ),
-                ),*/
-              ],
-            ),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor:  Colors.black,
               currentIndex: controller.currentIndex.value,
@@ -81,7 +47,7 @@ class MainScreen extends StatelessWidget {
                     AssetImage('assets/offers.png'),
                     color: K.kColor1,
                   ),
-                  label: 'Categories',
+                  label: 'Offers',
                 ),
                 BottomNavigationBarItem(
                   activeIcon: ImageIcon(

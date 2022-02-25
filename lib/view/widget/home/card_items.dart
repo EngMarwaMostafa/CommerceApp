@@ -22,7 +22,7 @@ class CardItems extends StatelessWidget {
   final String? quantity;
   final String? name;
 
-  // final ProductModels? productModels;
+
   final Function()? iconTap;
   final Function()? favIcon;
   final Icon? icon;
@@ -31,107 +31,119 @@ class CardItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(
-            height: 100.h,
-            width: 150.w,
-            child: Align(
-              alignment: Alignment.center,
-              child: Image.network(
-                image!,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(name!),
-          SizedBox(
-            height: 5.h,
-          ),
-          RatingBar.builder(
-            initialRating: 3,
-            minRating: 1,
-            direction: Axis.horizontal,
-            allowHalfRating: true,
-            itemCount: 5,
-            itemSize: 12.sp,
-            itemPadding: const EdgeInsets.symmetric(horizontal: 0),
-            itemBuilder: (context, _) => const Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
-            onRatingUpdate: (rating) {
-              print(rating);
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                price!.toString(),
-                style: TextStyle(color: K.kColor2, fontSize: 20.sp),
-              ),
-              SizedBox(
-                width: 20.w,
-              ),
-              const Text(
-                'SAR 300',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ],
-          ),
-          Text(
-            '5% VAT',
-            style: TextStyle(color: Colors.grey, fontSize: 9.sp),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: favIcon,
-                //  icon: controller.isFavourites(productId)
-                // ? const Icon(
-                //  Icons.favorite,
-                //   color: Colors.red,
-                //  )
-                icon: icon!,
-              ),
-              Container(
-                height: 40.h,
-                width: 100.w,
-                color: Colors.black,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.shopping_cart_rounded,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Add to Cart',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
+      child: SingleChildScrollView(
+        child: Column(
+         // crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SizedBox(
+              height: 100.h,
+              width: 150.w,
+              child: Align(
+                alignment: Alignment.center,
+                child: Image.network(
+                  image!,
+                  fit: BoxFit.cover,
                 ),
               ),
-              /* IconButton(
-                onPressed: iconTap,
-                icon: const Icon(
-                  Icons.shopping_cart,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(name!,
+           style: TextStyle(fontWeight: FontWeight.bold,
+            fontSize: 17.sp,
+               color: const Color(0xff515C6F),
+           ),),
+            SizedBox(
+              height: 5.h,
+            ),
+            RatingBar.builder(
+              initialRating: 3,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemSize: 12.sp,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 0),
+              itemBuilder: (context, _) => const Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (rating) {
+                print(rating);
+              },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'SAR',
+                  style: TextStyle(color: K.kColor2, fontSize: 20.sp),
+                ),
+                SizedBox(width: 5.w,),
+                Text(
+                  price!.toString(),
+                  style: TextStyle(color: K.kColor2, fontSize: 20.sp),
+                ),
+                SizedBox(
+                  width: 20.w,
+                ),
+                const Text(
+                  'SAR 70',
+                  style: TextStyle(color: Colors.grey,
+                      decoration: TextDecoration.lineThrough,),
+                ),
+              ],
+            ),
+            Text(
+              '5% VAT',
+              style: TextStyle(color: Colors.grey, fontSize: 9.sp),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: favIcon,
+                  //  icon: controller.isFavourites(productId)
+                  // ? const Icon(
+                  //  Icons.favorite,
+                  //   color: Colors.red,
+                  //  )
+                  icon: icon!,
+                ),
+                Container(
+                  height: 40.h,
+                  width: 100.w,
                   color: Colors.black,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.shopping_cart_rounded,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
-              ),*/
-            ],
-          ),
-        ],
+                /* IconButton(
+                  onPressed: iconTap,
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                    color: Colors.black,
+                  ),
+                ),*/
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

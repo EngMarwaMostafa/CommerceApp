@@ -71,6 +71,12 @@ flutter:
       - assets/home.png
       - assets/cart-home.png
       - assets/searh.png
+      - assets/brand.png
+      - assets/wishlist.png
+      - assets/contactUs.png
+      - assets/profile.png
+      - assets/logout.png
+      - assets/about.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

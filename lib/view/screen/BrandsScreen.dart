@@ -1,18 +1,20 @@
-import 'package:commerce_app/controllers/category_controller.dart';
-import 'package:commerce_app/models/category_model.dart';
+import 'package:commerce_app/controllers/brands_controller.dart';
+import 'package:commerce_app/models/brands_model.dart';
 import 'package:commerce_app/utils/theme.dart';
-import 'package:commerce_app/view/screen/BrandsScreen.dart';
+import 'package:commerce_app/view/screen/CategoriesScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
-class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({Key? key}) : super(key: key);
+class BrandsScreen extends StatelessWidget {
+  const BrandsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CategoryController());
+    final controller = Get.put(BrandsController());
     return Scaffold(
       body: Column(
         children: [
@@ -30,11 +32,13 @@ class CategoriesScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(backgroundColor: K.kColor8),
+                    onPressed: () {
+                      Get.to(() => const CategoriesScreen());
+                    },
+                    style: TextButton.styleFrom(backgroundColor: Colors.white),
                     child: Text(
                       'CATEGORIES',
-                      style: TextStyle(fontSize: 18.sp, color: K.kColor5),
+                      style: TextStyle(fontSize: 18.sp, color: Colors.black),
                     ),
                   ),
                 ),
@@ -48,14 +52,11 @@ class CategoriesScreen extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: TextButton(
-                    onPressed: () {
-                      Get.to(() =>
-                      const BrandsScreen());
-                    },
-                    style: TextButton.styleFrom(backgroundColor: Colors.white),
+                    onPressed: () {},
+                    style: TextButton.styleFrom(backgroundColor: K.kColor8),
                     child: Text(
                       'BRANDS',
-                      style: TextStyle(fontSize: 18.sp, color: Colors.black),
+                      style: TextStyle(fontSize: 18.sp, color: Colors.white),
                     ),
                   ),
                 ),
@@ -65,8 +66,8 @@ class CategoriesScreen extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
-          FutureBuilder<CategoryModel>(
-              future: controller.future,
+          FutureBuilder<BrandsModel>(
+              future: controller.getBrands,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -78,30 +79,29 @@ class CategoriesScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 ListTile(
-                                  leading: Container(
-                                    height: 65.h,
-                                    width: 65.w,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle),
-                                    child: Image.network(
-                                        snapshot.data!.data![index].icon!,
-                                        height: double.infinity,
-                                        width: double.infinity,
-                                        fit: BoxFit.contain),
-                                  ),
-                                  title: Text(
-                                    "${snapshot.data!.data![index].name!.en}",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17.sp,
-                                      color: const Color(0xff515C6F),
+                                    leading: Container(
+                                      height: 65.h,
+                                      width: 65.w,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: const BoxDecoration(
+                                          shape: BoxShape.circle),
+                                      child: Image.network(
+                                          snapshot.data!.data![index].logo!,
+                                          height: double.infinity,
+                                          width: double.infinity,
+                                          fit: BoxFit.contain),
                                     ),
-                                  ),
-                                  trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded),
-                                ),
-                                const Divider(),
+                                    title: Text(
+                                      snapshot.data!.data![index].name!,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17.sp,
+                                        color: const Color(0xff515C6F),
+                                      ),
+                                    ),
+                                    trailing: const Icon(
+                                        Icons.arrow_forward_ios_rounded)),
+                                const Divider()
                               ],
                             ),
                           ));

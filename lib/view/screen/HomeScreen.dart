@@ -2,6 +2,8 @@ import 'package:commerce_app/controllers/product_controller.dart';
 import 'package:commerce_app/models/banner_model.dart';
 import 'package:commerce_app/models/category_model.dart';
 import 'package:commerce_app/models/product_model.dart';
+import 'package:commerce_app/routes/routes.dart';
+import 'package:commerce_app/utils/theme.dart';
 import 'package:commerce_app/view/screen/search_screen.dart';
 import 'package:commerce_app/view/widget/home/CircleItems.dart';
 import 'package:commerce_app/view/widget/home/card_items.dart';
@@ -14,8 +16,44 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final controller = Get.put(ProductController());
+
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 85.h,
+        backgroundColor:K.kColor2,
+        title: const Text('BUY'),
+        leading: IconButton(
+          onPressed: () {
+            Get.toNamed(AppRoute.sideBarScreen);
+          },
+          icon: Image.asset('assets/menu.png'),
+        ),
+        actions: [
+          SizedBox(
+            width: 15.w,
+          ),
+          /*   Obx(
+                      () => Badge(
+                    position: BadgePosition.topEnd(top:12.h, end: 3.w),
+                    animationDuration: const Duration(milliseconds: 300),
+                    animationType: BadgeAnimationType.slide,
+                  //  badgeContent:
+                    //Text(
+                   //   cartController.quantity().toString(),
+                   //   style: const TextStyle(color: Colors.white),
+                //    ),
+                    child: IconButton(
+                      onPressed: () {
+                      //  Get.toNamed(Routes.ShoppingCartScreen);
+                      },
+                      icon: Image.asset('assets/cart-home.png'),
+                    ),
+                  ),
+                ),*/
+        ],
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -89,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }
-                }),
+                },),
             SizedBox(
               height: 10.h,
             ),
@@ -97,6 +135,7 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.only(left: 8.0.w, right: 8.w, top: 8.h),
               child: Row(
                 children: [
+                  SizedBox(width: 10.w,),
                   Text(
                     'National Day Products',
                     style: TextStyle(
@@ -115,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 2.0),
                       child: SizedBox(
                         height: 300,
                         child: ListView.builder(
@@ -164,6 +203,7 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.only(left: 8.0.w, right: 8.w, top: 8.h),
               child: Row(
                 children: [
+                  SizedBox(width: 10.w,),
                   Text(
                     'Most Viewed Products',
                     style: TextStyle(

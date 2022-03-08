@@ -48,23 +48,8 @@ class ContactUsScreen extends StatelessWidget {
               padding: EdgeInsets.only(
                   left: 20.w, right: 18.w, bottom: 17.h),
               height: 45.h,
-              child: TextField(
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(width: 3, color: Color(0xff707070)),
-                    borderRadius: BorderRadius.circular(3),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(width: 3, color: Colors.red),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-                //controller:
-              //  controller.textEditingControllerEmail,
-             //   onchange: (value) {
-                 // controller.email.value = value;
-               // },
-              ),
+              width: 337.w,
+             // child: EditableText(cursorColor: null,),
             ),
           ],
         ),

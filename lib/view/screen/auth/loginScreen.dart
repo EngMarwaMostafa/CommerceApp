@@ -152,23 +152,7 @@ class AuthScreen extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(right: 15.w),
-                                    child: Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Get.to(() =>
-                                              const ForgetPasswordScreen());
-                                        },
-                                        child: Text(
-                                          'Forgot Password?',
-                                          textAlign: TextAlign.end,
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            color: const Color(0xff515C6F),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(

@@ -10,7 +10,7 @@ class ProductServices {
 
   Future<ProductModel> fetchData() async {
     Response response =
-        await _dio.get("$baseurl/products?lang=en&categoryId=1");
+        await _dio.get("$baseurl/products?lang=en&categoryId=3");
     if (response.statusCode == 200) {
       // print(response.data);
       return ProductModel.fromJson(response.data);
